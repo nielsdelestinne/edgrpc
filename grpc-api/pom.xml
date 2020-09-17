@@ -54,6 +54,12 @@
             <artifactId>protobuf-maven-plugin</artifactId>
             <version>${protobuf-maven-plugin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
+            <version>4.0.0-rc-2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

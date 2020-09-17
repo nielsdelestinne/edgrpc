@@ -3,9 +3,16 @@
 - https://grpc.io/docs/languages/java/quickstart/
 - https://github.com/LogNet/grpc-spring-boot-starter
 
-# Questions
-1. Versionering van proto file + apart trekken
-1. Wat met 'leesbare' help-apis?
-    - https://ccbill.com/blog/grpc-vs-rest (bridging the gap)
-    - https://docs.microsoft.com/en-us/aspnet/core/grpc/comparison?view=aspnetcore-3.1#:~:text=HTTP%20API%20requests%20are%20sent,format%20isn't%20human%20readable.&text=Also%2C%20Protobuf%20messages%20support%20conversion%20to%20and%20from%20JSON. (Not human readable)
+# Steps
+1. Hoe een client & server op te zetten waarbij server via spring boot is:
+    - spring-boot-grpc starter (io.github project): https://github.com/LogNet/grpc-spring-boot-starter
+2. Hoe het mogelijk maken dat business toch nog JSON kan insturen en wij dit toch nog kunnen verwerken? Puur voor manuele inspectie / testing
+    - https://github.com/protocolbuffers/protobuf/blob/master/java/util/src/test/java/com/google/protobuf/util/JsonFormatTest.java
+    - https://developers.google.com/protocol-buffers/docs/proto3#json
+    - https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/util/package-summary
+
+# TODO
+1. Opkuis
+1. Versionering van proto file + apart trekken + client / server apart
+    - Alle events in 1 jar? Wat dan bij breaking change / aanpassing van event -> nieuwe versie waar iedereen op moet dependen...
 1. Performantie setup doen
