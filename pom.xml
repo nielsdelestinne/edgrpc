@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>be.niedel</groupId>
+    <groupId>be.niedel.edgrpc</groupId>
     <artifactId>edgrpc</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -17,20 +17,43 @@
         <junit-jupiter.version>5.7.0</junit-jupiter.version>
         <assertj-core.version>3.17.2</assertj-core.version>
         <h2.version>1.4.200</h2.version>
+        <jakarta.inject-api.version>2.0.0</jakarta.inject-api.version>
+        <springframework.version>5.2.9.RELEASE</springframework.version>
     </properties>
 
     <modules>
-        <module>domain</module>
         <module>grpc-api</module>
         <module>rest-api</module>
+        <module>service</module>
+        <module>domain</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>be.niedel.edgrpc</groupId>
+                <artifactId>domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.niedel.edgrpc</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
                 <version>${spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.inject</groupId>
+                <artifactId>jakarta.inject-api</artifactId>
+                <version>${jakarta.inject-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
