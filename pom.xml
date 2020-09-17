@@ -10,8 +10,13 @@
     <packaging>pom</packaging>
 
     <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <spring-boot-starter.version>2.3.3.RELEASE</spring-boot-starter.version>
         <lombok.version>1.18.12</lombok.version>
+        <junit-jupiter.version>5.7.0</junit-jupiter.version>
+        <assertj-core.version>3.17.2</assertj-core.version>
+        <h2.version>1.4.200</h2.version>
     </properties>
 
     <modules>
@@ -33,7 +38,28 @@
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot-starter.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 
 </project>
