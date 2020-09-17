@@ -1,0 +1,24 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package be.niedel.edgrpc.grpcapi;
+
+message CreateAgreementRequest {
+  Id id = 1;
+  Id employerId = 2;
+  Id employeeId = 3;
+  string statute = 4;
+  double wage = 5;
+
+}
+
+message CreateAgreementResponse {
+  Id id = 1;
+}
+
+message Id {
+  string value = 1;
+}
+
+service Agreement {
+  rpc createAgreement(CreateAgreementRequest) returns (CreateAgreementResponse);
+}

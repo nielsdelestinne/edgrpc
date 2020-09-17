@@ -31,4 +31,5 @@ public class Agreement {
         this.statute = statute;
         this.wage = wage;
     }
+
 }
