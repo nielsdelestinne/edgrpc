@@ -102,6 +102,11 @@
                 <artifactId>grpc-netty</artifactId>
                 <version>${grpc-io.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-stub</artifactId>
+                <version>${grpc-io.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
