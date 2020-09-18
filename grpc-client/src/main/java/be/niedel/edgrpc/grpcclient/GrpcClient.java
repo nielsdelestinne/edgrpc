@@ -1,59 +1,85 @@
 package be.niedel.edgrpc.grpcclient;
 
+import be.niedel.edgrpc.proto.Address;
 import be.niedel.edgrpc.proto.AgreementGrpc;
 import be.niedel.edgrpc.proto.AgreementGrpc.AgreementBlockingStub;
 import be.niedel.edgrpc.proto.CreateAgreementRequest;
+import be.niedel.edgrpc.proto.CreateAgreementResponse;
+import be.niedel.edgrpc.proto.CreateEmployeeRequest;
+import be.niedel.edgrpc.proto.CreateEmployeeResponse;
+import be.niedel.edgrpc.proto.CreateEmployerRequest;
+import be.niedel.edgrpc.proto.CreateEmployerResponse;
+import be.niedel.edgrpc.proto.EmployeeGrpc;
+import be.niedel.edgrpc.proto.EmployeeGrpc.EmployeeBlockingStub;
+import be.niedel.edgrpc.proto.EmployerGrpc;
+import be.niedel.edgrpc.proto.EmployerGrpc.EmployerBlockingStub;
 import be.niedel.edgrpc.proto.Id;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.util.JsonFormat;
+import be.niedel.edgrpc.proto.Name;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 public class GrpcClient {
 
-    public static void main(String[] args) throws InvalidProtocolBufferException {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 6565)
+    private static final Logger LOGGER = Logger.getLogger(GrpcClient.class.getName());
+    private static final int PORT = 6565;
+    private static final String HOST = "localhost";
+
+    public static void main(String[] args) {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(HOST, PORT)
                 .usePlaintext()
                 .build();
 
-        AgreementBlockingStub client = AgreementGrpc.newBlockingStub(channel);
+        EmployerBlockingStub grpcClientForEmployer = EmployerGrpc.newBlockingStub(channel);
+        var employer = createEmployer(grpcClientForEmployer);
 
+        EmployeeBlockingStub grpcClientForEmployee = EmployeeGrpc.newBlockingStub(channel);
+        var employee = createEmployee(grpcClientForEmployee);
+
+        AgreementBlockingStub grpcClientForAgreement = AgreementGrpc.newBlockingStub(channel);
+        createAgreement(grpcClientForAgreement, employer.getId(), employee.getId());
+        createAgreement(grpcClientForAgreement, employer.getId(), employee.getId());
+        createAgreement(grpcClientForAgreement, employer.getId(), employee.getId());
+
+        channel.shutdown();
+    }
+
+    private static CreateEmployerResponse createEmployer(EmployerBlockingStub client) {
+        CreateEmployerResponse response = client.createEmployer(CreateEmployerRequest.newBuilder()
+                .setId(Id.newBuilder().setValue(UUID.randomUUID().toString()))
+                .setName("Genericompany X").build());
+        LOGGER.info("Employer created: " + response.getId().getValue());
+        return response;
+    }
+
+    private static CreateEmployeeResponse createEmployee(EmployeeBlockingStub client) {
+        CreateEmployeeResponse response = client.createEmployee(CreateEmployeeRequest.newBuilder()
+                .setId(Id.newBuilder().setValue(UUID.randomUUID().toString()))
+                .setName(Name.newBuilder()
+                        .setFirstName("Tim")
+                        .setFirstName("Timmens"))
+                .setAddress(Address.newBuilder()
+                        .setStreet("Steenstraat")
+                        .setStreetNumber("185B")
+                        .setMunicipality("Leuven")
+                        .setCountry("Belgium").build()).build());
+        LOGGER.info("Employee created: " + response.getId().getValue());
+        return response;
+    }
+
+    private static CreateAgreementResponse createAgreement(AgreementBlockingStub client, Id employerId, Id employeeId) {
         CreateAgreementRequest createAgreementRequest = CreateAgreementRequest.newBuilder()
                 .setId(Id.newBuilder().setValue(UUID.randomUUID().toString()))
-                .setEmployeeId(Id.newBuilder().setValue(UUID.randomUUID().toString()))
-                .setEmployerId(Id.newBuilder().setValue(UUID.randomUUID().toString()))
+                .setEmployerId(employerId)
+                .setEmployeeId(employeeId)
                 .setStatute("WHITE_COLLAR")
                 .setWage(5000.85)
                 .build();
-        var agreementResponse = client.createAgreement(createAgreementRequest);
-
-        System.err.println("Hello: " + agreementResponse.getId().getValue());
-
-        System.out.println(JsonFormat.printer().print(createAgreementRequest));
-
-        CreateAgreementRequest.Builder builder = CreateAgreementRequest.newBuilder();
-        JsonFormat.parser().merge("{\n" +
-                "  \"id\": {\n" +
-                "    \"value\": \"ffad946c-98a4-4a6e-88bd-a69a89575979\"\n" +
-                "  },\n" +
-                "  \"employerId\": {\n" +
-                "    \"value\": \"dd37ab06-3f7b-4ed3-b694-8468ef2468e3\"\n" +
-                "  },\n" +
-                "  \"employeeId\": {\n" +
-                "    \"value\": \"ac22d59c-776a-478f-a6a2-fe3ae19bad26\"\n" +
-                "  },\n" +
-                "  \"statute\": \"WHITE_COLLAR\",\n" +
-                "  \"wage\": 5000.85\n" +
-                "}", builder);
-
-
-        var agreementResponse2 = client.createAgreement(builder.build());
-
-        System.err.println("Hello: " + agreementResponse2.getId().getValue());
-
-        channel.shutdown();
+        CreateAgreementResponse createAgreementResponse = client.createAgreement(createAgreementRequest);
+        LOGGER.info("Agreement created: " + createAgreementResponse.getId().getValue());
+        return createAgreementResponse;
     }
 
 }

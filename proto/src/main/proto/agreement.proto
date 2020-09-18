@@ -2,6 +2,9 @@ syntax = "proto3";
 option java_multiple_files = true;
 package be.niedel.edgrpc.proto;
 
+// In Intellij, add current 'proto' directory to 'Import paths' in Protocol Buffer (Languages & Frameworks)
+import "common.proto";
+
 message CreateAgreementRequest {
   Id id = 1;
   Id employerId = 2;
@@ -12,10 +15,6 @@ message CreateAgreementRequest {
 
 message CreateAgreementResponse {
   Id id = 1;
-}
-
-message Id {
-  string value = 1;
 }
 
 service Agreement {
