@@ -28,6 +28,8 @@ public class GrpcClient {
     private static final String HOST = "localhost";
 
     public static void main(String[] args) {
+        LOGGER.info("I AM A MICROSERVICE (CLIENT) REQUESTING DATA FROM A DIFFERENT MICROSERVICE (SERVER)");
+
         ManagedChannel channel = ManagedChannelBuilder.forAddress(HOST, PORT)
                 .usePlaintext()
                 .build();
