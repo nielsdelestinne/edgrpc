@@ -12,7 +12,10 @@
     - https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/util/package-summary
 
 # TODO
-1. Opkuis
 1. Versionering van proto file + apart trekken + client / server apart
     - Alle events in 1 jar? Wat dan bij breaking change / aanpassing van event -> nieuwe versie waar iedereen op moet dependen...
 1. Performantie setup doen
+
+# Open Questions
+- Proto files zitten nu in aparte jar (kan zelfs aparte repo). Versionering zijn dan via semver apart kunnen gebeuren.
+    - Nadeel: 1 grote artifact
