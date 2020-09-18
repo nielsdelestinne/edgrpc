@@ -1,6 +1,9 @@
-package be.niedel.edgrpc.grpcapi;
+package be.niedel.edgrpc.grpcclient;
 
-import be.niedel.edgrpc.grpcapi.AgreementGrpc.AgreementBlockingStub;
+import be.niedel.edgrpc.proto.AgreementGrpc;
+import be.niedel.edgrpc.proto.AgreementGrpc.AgreementBlockingStub;
+import be.niedel.edgrpc.proto.CreateAgreementRequest;
+import be.niedel.edgrpc.proto.Id;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import io.grpc.ManagedChannel;
