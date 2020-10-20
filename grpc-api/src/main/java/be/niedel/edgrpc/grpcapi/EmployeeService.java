@@ -6,7 +6,6 @@ import be.niedel.edgrpc.domain.employee.EmployeeRepository;
 import be.niedel.edgrpc.domain.employee.Name;
 import be.niedel.edgrpc.proto.CreateEmployeeRequest;
 import be.niedel.edgrpc.proto.CreateEmployeeResponse;
-import be.niedel.edgrpc.proto.CreateEmployerResponse;
 import be.niedel.edgrpc.proto.EmployeeGrpc;
 import be.niedel.edgrpc.proto.Id;
 import io.grpc.stub.StreamObserver;

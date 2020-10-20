@@ -2,6 +2,7 @@
 - https://www.baeldung.com/grpc-introduction
 - https://grpc.io/docs/languages/java/quickstart/
 - https://github.com/LogNet/grpc-spring-boot-starter
+- https://www.baeldung.com/java-microbenchmark-harness
 
 # Steps
 1. Hoe een client & server op te zetten waarbij server via spring boot is:
