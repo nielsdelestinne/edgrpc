@@ -26,15 +26,15 @@
     - Nadeel: 1 grote artifact
     
 # Agenda
-0. Designing Data Intensive Applications
-1. Protobuf as an alternative for JSON
+0. Designing Data Intensive Applications (niet te lang op blijven hangen)
+1. Protobuf as an alternative for JSON (niet te lang op blijven hangen)
     - Contract Driven / Specification / Schemas
         - Json -> contract testing with PACT, Spring contract,....
     - Pojo, Stub & Client generation (ook zonder gRPC)?
     - Performance
     - Backwards Compatibility
     - Disadvantage (binary, but encodes to JSON)
-2. Designing Microservices with gRPC and Protobuf instead of Http-based restful WS & JSON
-    - Demo, setup,...
+2. Designing Microservices with gRPC and Protobuf instead of Http-based restful WS & JSON (niet te lang op blijven hangen)
+    - Demo, setup,... 
 3. Designing Microservices with Pulsar & JSON versus Pulsar & Protobuf
     - Limitations on size?
