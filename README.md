@@ -31,10 +31,15 @@
     - Contract Driven / Specification / Schemas
         - Json -> contract testing with PACT, Spring contract,....
     - Pojo, Stub & Client generation (ook zonder gRPC)?
-    - Performance
-    - Backwards Compatibility
-    - Disadvantage (binary, but encodes to JSON)
+    - Size: uncompressed versus compressed (compared with json)
+    - Performance: serialization vs deserialization speed
+    - Backwards Compatibility (v2 versus v3 -> optional, required,...)
+    - Disadvantage (binary, but encodes to JSON -> kunnen voorbeeld aanhalen)
 2. Designing Microservices with gRPC and Protobuf instead of Http-based restful WS & JSON (niet te lang op blijven hangen)
     - Demo, setup,... 
 3. Designing Microservices with Pulsar & JSON versus Pulsar & Protobuf
     - Limitations on size?
+
+## Pulsar
+- https://pulsar.apache.org/docs/en/2.6.1/concepts-schema-registry/#supported-schema-formats
+- https://pulsar.apache.org/docs/en/develop-binary-protocol
